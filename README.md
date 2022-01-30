@@ -1,6 +1,51 @@
-# conversation-binairy_octale
-a pragramme that converts numbers inputed by users from the binairy system to octal system without passing throught the decimal system
-it follows this steps :
-1/-it makes sure that the user inputed a binairy number, if the user input a non_binairy number the programme will ask him to reinput a nombre; the process repeats till the user input a binairy number (that does mean there won't be any conversation unless user follow the rules of inputing).
-2/-it convert a binairy number using a special method which is described in this video : https://www.youtube.com/watch?v=JxmarqiqUdM.
-3/-it output the result at the end as an octal number.
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int nombre_bin_entier,chiffre;
+
+
+/*procedure qui test si un nombre est binaire ou non*/
+void binaire(float *p) {
+  float nombre_bin_reel;
+  int indicateur_bin=1,tmp,indicateur_bin_reel;
+  do{
+    nombre_bin_entier = *p;
+    nombre_bin_reel = *p - nombre_bin_entier;
+    
+    while ( nombre_bin_reel - tmp != 0 )
+    {
+    nombre_bin_reel= nombre_bin_reel * 10;
+    tmp= nombre_bin_reel;
+    }
+
+    while ( tmp != 0 ) {
+      chiffre = tmp % 10;
+      if (chiffre != 1 && chiffre != 0) {
+        indicateur_bin_reel = 0;
+        tmp = 0;
+        printf("\nce nombre est pas binaire");
+        printf("\n-------------------------------------\nsaisissez un nombre "
+               "en binaire : ");
+        scanf("%f", p);
+      } else {
+        indicateur_bin_reel = 1;
+        tmp /= 10;
+      }
+    }
+    while ( nombre_bin_entier != 0 ) {
+      chiffre = nombre_bin_entier % 10;
+      if (chiffre != 1 && chiffre != 0) {
+        indicateur_bin = 0;
+        nombre_bin_entier = 0;
+        printf("\nce nombre est pas binaire");
+        printf("\n-------------------------------------\nsaisissez un nombre "
+               "en binaire : ");
+        scanf("%f", p);
+      } else {
+        indicateur_bin = 1;
+        nombre_bin_entier /= 10;
+      }
+    }
+  } while (indicateur_bin == 0 && indicateur_bin_reel == 0);
+}
