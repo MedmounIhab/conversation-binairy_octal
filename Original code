@@ -1,0 +1,92 @@
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int nombre_bin_entier,chiffre;
+
+
+/*procedure qui test si un nombre est binaire ou non*/
+void binaire(float *p) {
+  /*float nombre_bin_reel;*/
+  int indicateur_bin=1/*,tmp,indicateur_bin_reel*/;
+  do{
+    nombre_bin_entier = *p;
+    /*nombre_bin_reel = *p - nombre_bin_entier;
+    
+    while ( nombre_bin_reel - tmp != 0 )
+    {
+    nombre_bin_reel= nombre_bin_reel * 10;
+    tmp= nombre_bin_reel;
+    }
+
+    while ( tmp != 0 ) {
+      chiffre = tmp % 10;
+      if (chiffre != 1 && chiffre != 0) {
+        indicateur_bin_reel = 0;
+        tmp = 0;
+        printf("\nce nombre est pas binaire");
+        printf("\n-------------------------------------\nsaisissez un nombre "
+               "en binaire : ");
+        scanf("%f", p);
+      } else {
+        indicateur_bin_reel = 1;
+        tmp /= 10;
+      }
+    }*/
+    while ( nombre_bin_entier != 0 ) {
+      chiffre = nombre_bin_entier % 10;
+      if (chiffre != 1 && chiffre != 0) {
+        indicateur_bin = 0;
+        nombre_bin_entier = 0;
+        printf("\nce nombre est pas binaire");
+        printf("\n-------------------------------------\nsaisissez un nombre "
+               "en binaire : ");
+        scanf("%f", p);
+      } else {
+        indicateur_bin = 1;
+        nombre_bin_entier /= 10;
+      }
+    }
+  } while (indicateur_bin == 0 /*&& indicateur_bin_reel == 0*/);
+}
+
+
+/*fonction qui converte le nombre on octale*/
+int nombre_octale_bin(float *p) 
+{
+  float octale=0;
+  int i,n=0,s=0,c=3;
+  nombre_bin_entier=*p;
+  while (nombre_bin_entier != 0) {
+    for ( i = c ; i >= 1 ; i-- ) {
+      if (nombre_bin_entier == 0) {
+        break;
+      }
+      chiffre= nombre_bin_entier % 10;
+      octale= octale +  pow ( 2 , n ) * chiffre;
+      nombre_bin_entier /= 10;
+      n++;
+    }
+    c = 3;
+    n = 0;
+    s = s * 10 + octale;
+    octale = 0;
+  }
+  while (s != 0) {
+    chiffre = s % 10;
+    octale= octale * 10 + chiffre;
+    s/= 10;
+  }
+  return octale;
+}
+
+
+int main() {
+  float nombre_bin,octale;
+  printf("\n-------------------------------------\nsaisissez un nombre en binaire : ");
+  scanf("%f", &nombre_bin);
+  binaire(&nombre_bin);
+  octale= nombre_octale_bin(&nombre_bin);
+  printf("\nle nombre en octale est : %.f",octale);
+  return 0;
+}
