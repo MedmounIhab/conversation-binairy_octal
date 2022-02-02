@@ -7,32 +7,49 @@ int nombre_bin_entier,chiffre;
 
 /*procedure qui test si un nombre est binaire ou non*/
 void binaire(float *p) {
-  /*float nombre_bin_reel;*/
-  int indicateur_bin=1/*,tmp,indicateur_bin_reel*/;
+  float nombre_bin_flottant;
+  int indicateur_bin=1,indicateur_flottant=1,i,tmp,c=0;
   do{
-    nombre_bin_entier = *p;
-    /*nombre_bin_reel = *p - nombre_bin_entier;
-    
-    while ( nombre_bin_reel - tmp != 0 )
+    indicateur_flottant=1;
+    nombre_bin_entier=*p;
+    nombre_bin_flottant= *p - nombre_bin_entier;
+    if ( nombre_bin_flottant == 0 )
     {
-    nombre_bin_reel= nombre_bin_reel * 10;
-    tmp= nombre_bin_reel;
+        indicateur_flottant=1;
     }
-
-    while ( tmp != 0 ) {
-      chiffre = tmp % 10;
-      if (chiffre != 1 && chiffre != 0) {
-        indicateur_bin_reel = 0;
-        tmp = 0;
-        printf("\nce nombre est pas binaire");
-        printf("\n-------------------------------------\nsaisissez un nombre "
-               "en binaire : ");
-        scanf("%f", p);
-      } else {
-        indicateur_bin_reel = 1;
-        tmp /= 10;
-      }
-    }*/
+    else
+    {
+            for ( i = c ; i < 6 ; i++ )
+            {
+                nombre_bin_flottant*=10;
+                tmp= nombre_bin_flottant;
+                tmp= tmp % 10;
+                printf("%d ",tmp);
+                if ( tmp != 1 && tmp != 0 )
+                    {
+                        indicateur_flottant=0;
+                        printf("\nce nombre est pas binaire");
+                        printf("\n-------------------------------------\nsaisissez un nombre "
+                        "en binaire : ");
+                        scanf("%f", p);
+                        nombre_bin_entier = *p;
+                        nombre_bin_entier=*p;
+                        nombre_bin_flottant= *p - nombre_bin_entier;
+                        c=0;
+                    }
+                    else if ( nombre_bin_flottant == 0 )
+                    {
+                        indicateur_flottant=1;
+                        c=6;
+                    }
+                    else
+                    {
+                        indicateur_flottant=1;
+                    }
+            }
+    }
+    if ( indicateur_flottant == 1 )
+    {
     while ( nombre_bin_entier != 0 ) {
       chiffre = nombre_bin_entier % 10;
       if (chiffre != 1 && chiffre != 0) {
@@ -42,17 +59,19 @@ void binaire(float *p) {
         printf("\n-------------------------------------\nsaisissez un nombre "
                "en binaire : ");
         scanf("%f", p);
+        nombre_bin_entier=*p;
       } else {
         indicateur_bin = 1;
         nombre_bin_entier /= 10;
       }
     }
-  } while (indicateur_bin == 0 /*&& indicateur_bin_reel == 0*/);
+    }
+  } while (indicateur_bin == 0 && indicateur_flottant == 0 );
 }
 
 
 /*fonction qui converte le nombre on octale*/
-int nombre_octale_bin(float *p) 
+int nombre_octale_bin(float *p)
 {
   float octale=0;
   int i,n=0,s=0,c=3;
